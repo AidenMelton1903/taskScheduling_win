@@ -11,8 +11,8 @@ stores all task_t structs, the functions they correspond to (stored in a functio
 ## void initTaskStruct(struct taskStruct *)
 when provided with a pointer to a taskStruct, it initializes it.
 
-## void addTask(struct taskStruct *, void function *, uint32_t time_ms)
-when provided with a pointer to a taskStruct, a pointer to a function (requires it to be of type void and have no input parameters) and a uint32 representing delay time in ms, this function creates a new task inside the taskStruct. Presently, the maximum possible delay for a task is roughly 24 hours, times beyond this will likely not run at all and attempting to add one will cause the program to exit with error code 2.
+## int addTask(struct taskStruct *, void function *, uint32_t time_ms)
+when provided with a pointer to a taskStruct, a pointer to a function (requires it to be of type void and have no input parameters) and a uint32 representing delay time in ms, this function creates a new task inside the taskStruct. Presently, the maximum possible delay for a task is roughly 24 hours, times beyond this will likely not run at all and attempting to add one will cause the program to exit with error code 2. addTask() will return the index of the created task, if successful.
 
 ## void runTasks(struct taskStruct *)
 when provided with a taskStruct, it checks if any tasks have been scheduled to run and runs them if so. Ideally this function should be contained within an infinite loop.

@@ -1,3 +1,4 @@
+#include <stdint.h>
 #ifndef COOP_SCHEDULER_H
 #define COOP_SCHEDULER_H
 
@@ -18,7 +19,8 @@ struct taskStruct{
 };
 
 void initTaskStruct(struct taskStruct *taskIn);
-void addTask(struct taskStruct *taskIn, taskFunc newFunc, uint32_t time);
+int addTask(struct taskStruct *taskIn, taskFunc newFunc, uint32_t time);
+void removeTask(struct taskStruct *taskIn, uint32_t index);
 void runTasks(struct taskStruct *taskIn);
 
 #endif

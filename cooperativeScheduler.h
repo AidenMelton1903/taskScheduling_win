@@ -15,6 +15,7 @@ struct task_t{
 struct taskStruct{
 	struct task_t tasks[256];
 	taskFunc taskFDT[256];
+	taskFunc enqueuedTasks[128];
 	uint32_t taskIndex;
 };
 

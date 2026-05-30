@@ -22,22 +22,9 @@ int addTask(struct taskStruct *taskIn, taskFunc newFunc, uint32_t time){
 }
 
 void removeTask(struct taskStruct *taskIn, uint32_t index){
-	
-	uint32_t tempSize = taskIn->taskIndex - index;
-	struct task_t tempTasks[tempSize];
-	taskFunc tempFDT[tempSize];
-	
 	//duplicate actual arrays into temp copies
-	printf("start of copy: %d, end: %d\n",index+1,taskIn->taskIndex-1);
-	for(int i = 0; i < tempSize; i++){
-		tempTasks[i] = taskIn->tasks[index+i+1];
-		tempFDT[i] = taskIn->taskFDT[index+i+1];
-	}
-	//insert it back into the main arrays
-	printf("start of reload: %d, end: %d\n",index,taskIn->taskIndex-2);
-	for(int i = 0; i < tempSize; i++){
-		taskIn->tasks[index+i] = tempTasks[i];
-		taskIn->taskFDT[index+i] = tempFDT[i];
+	for(int i = index; i < taskIn->taskIndex-1; i++){
+		taskIn->tasks[i] = taskIn->tasks[i+1];
 	}
 	taskIn->taskIndex--;
 }

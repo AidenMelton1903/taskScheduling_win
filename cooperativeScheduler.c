@@ -22,12 +22,22 @@ int addTask(struct taskStruct *taskIn, taskFunc newFunc, uint32_t time){
 }
 
 void removeTask(struct taskStruct *taskIn, uint32_t index){
-	//duplicate actual arrays into temp copies
+	printf("shifting %u with %d\n",index,taskIn->taskIndex-1);
+	taskIn->tasks[index]=taskIn->tasks[taskIn->taskIndex-1];
+	taskIn->taskFDT[index]=taskIn->taskFDT[taskIn->taskIndex-1];
+	taskIn->taskIndex--;
+	printf("shifting %u with %d\n");
+}
+
+void removeTaskShift(struct taskStruct *taskIn, uint32_t index){
 	for(int i = index; i < taskIn->taskIndex-1; i++){
 		taskIn->tasks[i] = taskIn->tasks[i+1];
+		taskIn->taskFDT[i] = taskIn->taskFDT[i+1];
 	}
 	taskIn->taskIndex--;
 }
+
+
 
 
 void runTasks(struct taskStruct *taskIn){

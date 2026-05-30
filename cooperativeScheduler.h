@@ -22,6 +22,7 @@ struct taskStruct{
 void initTaskStruct(struct taskStruct *taskIn);
 int addTask(struct taskStruct *taskIn, taskFunc newFunc, uint32_t time);
 void removeTask(struct taskStruct *taskIn, uint32_t index);
+void removeTaskShift(struct taskStruct *taskIn, uint32_t index);
 void runTasks(struct taskStruct *taskIn);
 
 #endif

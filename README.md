@@ -15,7 +15,10 @@ when provided with a pointer to a taskStruct, it initializes it.
 when provided with a pointer to a taskStruct, a pointer to a function (requires it to be of type void and have no input parameters) and a uint32 representing delay time in ms, this function creates a new task inside the taskStruct. Presently, the maximum possible delay for a task is roughly 24 hours, times beyond this will likely not run at all and attempting to add one will cause the program to exit with error code 2. addTask() will return the index of the created task, if successful.
 
 ## void removeTask(struct taskStruct *, uint32_t index)
-removes task from provided taskStruct at index. To do this it copies the rest of the tasks array and shifts it leftwards, overwriting and removing the task in the process. This may be changed in the future, however at present the intent was to minimize the number of tasks that would be iterated over within the main loop. This may not be valid reasoning. In any case, this scheduler isn't really meant to switch tasks that often.
+shifts the element at the back of the array into the specified index, then decrements the number of tasks by 1. This is a very efficient operation, but may lead to tasks being slightly unordered. If this is important to you, use removeTaskShift() instead.
+
+## void removeTaskShift(struct taskStruct *, uint32_t index)
+shifts the arrays containing task info to the left, then decrements the number of tasks by 1. This preserves the ordering of the tasks arrays, but can be a bit slow/demanding which is often not ideal for embedded applications. Unless the ordering of tasks is absolutely essential to you, it is recommended to use removeTask().
 
 ## void runTasks(struct taskStruct *)
 when provided with a taskStruct, it checks if any tasks have been scheduled to run and runs them if so. Ideally this function should be contained within an infinite loop.
